@@ -17,5 +17,5 @@
     [v1 v2 v3 (* v1 v2 v3)]
     0))))
 
-(println (last (first tuples)))
-(println (last (first triples)))
+(println (last (first tuples))) ;; 270144
+(println (last (first triples))) ;; 261342720

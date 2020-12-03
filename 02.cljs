@@ -1013,6 +1013,5 @@
   [[min max letter pw]]
   (xor (= letter (nth pw (dec min))) (= letter (nth pw (dec max)))))
 
-(println (count (filter corrupt-rule-1? pws)))
-(println (count (filter corrupt-rule-2? pws)))
-
+(println (count (filter corrupt-rule-1? pws))) ;; 398
+(println (count (filter corrupt-rule-2? pws))) ;; 562
