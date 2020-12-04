@@ -1007,7 +1007,7 @@
 
 (defn corrupt-rule-1?
   [[min max letter pw]]
-  (<= min (count (filter #(= % letter) (str/split pw #""))) max))
+  (<= min (count (filter (partial = letter) (str/split pw ""))) max))
 
 (defn corrupt-rule-2?
   [[min max letter pw]]
