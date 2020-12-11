@@ -102,20 +102,26 @@
 
 (def max-adapter (reduce max adapters))
 
-(def differences (let [inputs (sort (conj adapters 0))
-                       ouputs (sort (conj adapters (+ 3 max-adapter)))]
+(def differences (let [inputs (->> 0 
+                                   (conj adapters) 
+                                   sort)
+                       ouputs (->> adapters
+                                   (reduce max)
+                                   (+ 3) 
+                                   (conj adapters) 
+                                   sort)]
                    (map - ouputs inputs)))
 
 (def result-1 (->> differences
                    (group-by identity)
-                   (map #(count (second %1)))
+                   (map (comp count second))
                    (reduce *)))
 
 (defn trib-seq []
   (let [trib-step (fn
                     [[a b c]]
                     [b c (+ a b c)])]
-    (map first (iterate trib-step [0 1 1]))))
+    (map first (iterate trib-step [1 1 2]))))
 
 (def result-2 (->> differences
                    (partition-by (partial = 3))
@@ -123,7 +129,7 @@
                    (map count)
                      ;; the correct numbers of combinations for a chunk of 1s are the tribonacci numbers
                      ;; 0 1 1 2 4 7 13 24 44 81 149 ... 
-                   (map #(nth (trib-seq) (inc %1)))
+                   (map (partial nth (trib-seq)))
                    (reduce *)))
 
 (println result-1) ;; 2201
